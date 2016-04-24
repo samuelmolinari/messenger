@@ -9,6 +9,7 @@ defmodule Messenger.Message do
   def send(from: user, to: "@" <> username, content: content) do
     recipient = Messenger.User.find_by_username(username)
     server = Messenger.Channel.server(user, recipient)
+    Messenger.Channel.Supervisor.start_channel(user, recipient)
     Messenger.Message.send(from: user, to: server, content: content)
   end
 
