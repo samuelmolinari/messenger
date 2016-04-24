@@ -9,6 +9,10 @@ defmodule Messenger.Channel.Supervisor do
     Supervisor.start_child(__MODULE__, [name])
   end
 
+  def start_channel(user1, user2) do
+    Supervisor.start_child(__MODULE__, [user1, user2])
+  end
+
   def init(:ok) do
     children = [
       worker(Messenger.Channel, [])
